@@ -93,7 +93,8 @@ export default ClassName;
 - **this.state** is a special immutable object for keeping track of this component's state
   - to change state, you must use a special method to set the whole thing (use spread to copy the existing state):
     - `this.setState({...this.state, athing = this.state.athing + 1});`
-    - setting state is asynchronous
+    - setting state is asynchronous; it is not instant
+    - changing state causes the component to re-render
 - **render()** returns the HTML that will be in the page
 - **return ()** allows you to return one element (which can have multiple elements inside it)
 - {} is the portal to JavaScript which lets you put variables in the HTML
@@ -145,4 +146,29 @@ increaseAthing = () => {
 }
 //...
 <button onClick={this.increaseAthing}>increase athing</button>
+```
+
+keeping track of input changes on a form (functional)
+- double-binding keeps the input value in sync with state
+```
+//inside the component's function
+const changeSize = (newSize) => {
+  setSize(newSize);
+  //do some validation if you want, but must use newSize because size is not yet updated
+}
+//...
+<input type="number" onChange={(e)=>changeSize(e.target.value)} value={size}>
+//or if not doing anything extra, directly use setSize() and you don't need the extra function
+<input type="number" onChange={(e)=>setSize(e.target.value)} value={size}>
+```
+
+prevent the form submission from refreshing the page (default behavior)
+```
+//inside the component's function
+const handleSubmit = (e) => {
+  e.preventDefault
+  //do whatever else the form submission should do, using the variables from state
+}
+//...
+<form onSubmit={handleSubmit}>
 ```
