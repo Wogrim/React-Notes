@@ -154,6 +154,19 @@ making a component instead (pass info it needs via props)
 </div>
 ```
 
+## conditional rendering
+
+use javascript ternary operator if you want to have logic decide whether to render something
+- (based on a variable in state)
+```
+// if errorMessage is not empty string (empty string is falsey), show it, else nothing
+{
+  errorMessage ?
+  <h3 style={styles.error}>{errorMessage}</h3>
+  : ''
+}
+```
+
 ## React Sythetic Events
 
 add events to elements in your custom components
