@@ -172,3 +172,30 @@ const handleSubmit = (e) => {
 //...
 <form onSubmit={handleSubmit}>
 ```
+
+## creating elements/components from an array
+
+to create things based on array, you must use array.map()
+- what you make needs a unique key; index of the element is fine
+```
+<div>
+{
+  colors.map((color,index) => { return (
+    <div key={index}>
+      <h3>This color is {color}</h3>
+    </div>
+  );})
+}
+</div>
+```
+
+making a component instead (pass info it needs via props)
+```
+<div>
+{
+  colors.map((color,index) => { return (
+    <Box key={index} color=color />
+  );})
+}
+</div>
+```
