@@ -199,3 +199,25 @@ making a component instead (pass info it needs via props)
 }
 </div>
 ```
+
+## sending data from child to parent components ("lifting state")
+
+to send data from parent to child components, we send them as props
+
+for a parent to get back data from its child, it must pass a function to the child (in props)
+```
+//in parent component
+const [items, setItems] = useState([]);
+
+const addTask = (label) => {
+    setItems([...items, { label: label, complete: false }]);
+}
+//...
+<TodoListForm addTask={addTask} />
+
+//in child component ('label' is in state, from an input)
+const submitForm = (e) => {
+    e.preventDefault();
+    props.addTask(label);
+}
+```
