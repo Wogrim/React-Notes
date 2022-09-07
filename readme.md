@@ -127,6 +127,33 @@ const ComponentName = (props) => {
 export default ComponentName
 ```
 
+## creating elements/components from an array
+
+to create things based on array, you must use array.map()
+- what you make needs a unique key; index of the element is fine
+```
+<div>
+{
+  colors.map((color,index) => { return (
+    <div key={index}>
+      <h3>This color is {color}</h3>
+    </div>
+  );})
+}
+</div>
+```
+
+making a component instead (pass info it needs via props)
+```
+<div>
+{
+  colors.map((color,index) => { return (
+    <Box key={index} color=color />
+  );})
+}
+</div>
+```
+
 ## React Sythetic Events
 
 add events to elements in your custom components
@@ -147,6 +174,8 @@ increaseAthing = () => {
 //...
 <button onClick={this.increaseAthing}>increase athing</button>
 ```
+
+## form-specific stuff
 
 keeping track of input changes on a form (functional)
 - double-binding keeps the input value in sync with state
@@ -173,31 +202,22 @@ const handleSubmit = (e) => {
 <form onSubmit={handleSubmit}>
 ```
 
-## creating elements/components from an array
-
-to create things based on array, you must use array.map()
-- what you make needs a unique key; index of the element is fine
+checkboxes don't have a value, they have a *checked* property (boolean)
 ```
-<div>
-{
-  colors.map((color,index) => { return (
-    <div key={index}>
-      <h3>This color is {color}</h3>
-    </div>
-  );})
-}
-</div>
+<input type="checkbox" checked={complete} onChange={(e) => setComplete(e.target.checked)} />
 ```
 
-making a component instead (pass info it needs via props)
+select and options:
 ```
-<div>
-{
-  colors.map((color,index) => { return (
-    <Box key={index} color=color />
-  );})
-}
-</div>
+const [selected, setSelected] = useState(startingID);
+//...
+<select value={selected} onChange={(e)=>setSelected(e.target.value)}>
+  {
+    items.map((item, index) => return (
+      <option key={index} value={item.id}>{item.name}</option>
+    )
+  }
+</select>
 ```
 
 ## sending data from child to parent components ("lifting state")
