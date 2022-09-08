@@ -224,12 +224,12 @@ select and options:
 ```
 const [selected, setSelected] = useState(startingID);
 //...
-<select value={selected} onChange={(e)=>setSelected(e.target.value)}>
-  {
-    items.map((item, index) => return (
-      <option key={index} value={item.id}>{item.name}</option>
-    )
-  }
+<select value={selected} onChange={(e) => setSelected(e.target.value)}>
+    {
+        items.map((item, index) => (
+            <option key={index} value={item.id}>{item.name}</option>
+        ))
+    }
 </select>
 ```
 
@@ -338,8 +338,8 @@ in **App.js**
 import {Routes,Route} from 'react-router-dom';
 //in the render, each Route specifies what is displayed if the URL matches its path
 <Routes>
-  <Route path="/" element={<Home />}>
-  <Route path="/about" element={<About />}>
+  <Route path="/" element={<Home />} />
+  <Route path="/about" element={<About />} />
 <Routes>
 ```
 
