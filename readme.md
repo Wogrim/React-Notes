@@ -278,3 +278,38 @@ useEffect(() => {
     });
 }, []);
 ```
+
+## Axios for easier API calls
+
+in your project folder (adjacent to *package.json*) with the server not running
+```
+npm install axios
+```
+
+in whatever component you need to use it
+```
+import axios from 'axios';
+```
+
+to make an API get request
+```
+fetch("https://pokeapi.co/api/v2/pokemon?limit=-1")
+  .then(response => response.json())
+  .then(response => {
+      setAllPokemon(response.results.map(p => p.name));
+  })
+  .catch(err => {
+      setAllPokemon([]);
+  });
+//BECOMES
+axios.get("https://pokeapi.co/api/v2/pokemon?limit=-1")
+  .then(response => {
+      setAllPokemon(response.data.results.map(p => p.name));
+  })
+  .catch(err => {
+      setAllPokemon([]);
+  });
+```
+
+- saves us from doing `.then(response => response.json())`
+- the actual server response is now in *response.data*
