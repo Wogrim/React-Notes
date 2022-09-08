@@ -254,3 +254,27 @@ const submitForm = (e) => {
     props.addTask(label);
 }
 ```
+
+## useEffect - do something on component first render
+
+import it with useState
+```
+import React, {useState, useEffect} from 'react';
+```
+
+in your functional component, call the **useEffect** function
+- first parameter is function that will be run on first render of the component
+- second parameter is an array of variables to watch: when one changes, run first parameter again
+- if first parameter returns a function, it will be called when the component is being destroyed (use for any needed cleanup)
+```
+useEffect(() => {
+  fetch("https://pokeapi.co/api/v2/pokemon?limit=-1")
+    .then(response => response.json())
+    .then(response => {
+        setAllPokemon(response.results.map(p => p.name));
+    })
+    .catch(err => {
+        setAllPokemon([]);
+    });
+}, []);
+```
