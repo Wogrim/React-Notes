@@ -313,3 +313,60 @@ axios.get("https://pokeapi.co/api/v2/pokemon?limit=-1")
 
 - saves us from doing `.then(response => response.json())`
 - the actual server response is now in *response.data*
+
+## front-end routing with React Router
+
+front-end routing is the front-end use of the URL to change the components of the page  
+(as opposed to the usual back-end routing where the server gives you a different page based on the URL)
+
+to install React Router
+```
+npm install react-router-dom
+```
+
+in **index.js**
+```
+import {BrowserRouter} from 'react-router-dom';
+// in the render, wrap <App /> in a <BrowserRouter> component
+<BrowserRouter>
+  <App />
+</BrowserRouter>
+```
+
+in **App.js**
+```
+import {Routes,Route} from 'react-router-dom';
+//in the render, each Route specifies what is displayed if the URL matches its path
+<Routes>
+  <Route path="/" element={<Home />}>
+  <Route path="/about" element={<About />}>
+<Routes>
+```
+
+wherever you need front-end routing links, don't use *a* tag, use **Link**
+```
+import {Link} from 'react-router-dom';
+//in the render
+<Link to="/about">About Page</Link>
+```
+
+if we want to navigate someone to a route such as in response to an event
+```
+import {useNavigate} from 'react-router-dom';
+//near the top of our functional component
+const navigate = useNavigate();
+//to do the navigation in a function somewhere
+navigate(`/people/${id}`);
+```
+
+you can also `navigate(-1)` to send the user back one page or `navigate(1)` for forward
+
+
+if your routes need to get a variable in the path
+```
+import {useParams} from 'react-router';
+//near the top of our functional component
+const {personID} = useParams();
+//in the Route's path, precede variable name with colon to specifiy it is a variable
+<Route path="/people/:personID" element={<Person />} />
+```
